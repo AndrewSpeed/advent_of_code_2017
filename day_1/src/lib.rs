@@ -1,18 +1,23 @@
-fn solve_captcha(captcha: &str) -> i64 {
-    let captcha_numbers: Vec<i64> = String::from(captcha).chars().map(|c| i64::from(c.to_digit(10).unwrap())).collect();
+pub fn solve_captcha(captcha: String) -> u32 {
+    println!("Solving: {}", captcha);
+    let bytes = captcha.into_bytes();
+    println!("Bytes: {:?}", bytes);
 
     let mut result = 0;
 
-    for (index, number) in captcha_numbers.iter().enumerate() {
-        if matches_next_number(captcha_numbers.as_slice(), index) {
+    for (index, byte) in bytes.iter().enumerate() {
+        if matches_next_number(bytes.as_slice(), index) {
+            let number = char::from(*byte).to_digit(16).unwrap();
+            println!("Number: {}", number);
             result += number;
+            println!("Updated result to: {}", result);
         }
     }
 
     return result;
 }
 
-fn matches_next_number(numbers: &[i64], index: usize) -> bool {
+fn matches_next_number(numbers: &[u8], index: usize) -> bool {
     let next_index;
 
     if index == (numbers.len() - 1) {
@@ -30,22 +35,22 @@ mod tests {
 
     #[test]
     fn it_solves_a_captcha_with_two_repeated_numbers() {
-        assert_eq!(3, solve_captcha("1122"));
+        assert_eq!(3, solve_captcha(String::from("1122")));
     }
 
     #[test]
     fn it_solves_a_captcha_with_one_number_repeated_multiple_times() {
-        assert_eq!(4, solve_captcha("1111"));
+        assert_eq!(4, solve_captcha(String::from("1111")));
     }
 
     #[test]
     fn it_solves_a_captcha_with_no_repeated_numbers() {
-        assert_eq!(0, solve_captcha("1234"));
+        assert_eq!(0, solve_captcha(String::from("1234")));
     }
 
     #[test]
     fn it_solves_a_captcha_with_the_last_number_matchins_the_first() {
-        assert_eq!(9, solve_captcha("91212129"));
+        assert_eq!(9, solve_captcha(String::from("91212129")));
     }
 
     #[test]
