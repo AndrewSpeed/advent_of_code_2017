@@ -1,0 +1,15 @@
+[package]
+name = "day_1"
+version = "0.1.0"
+authors = ["Andrew Speed <andrew.cspeed@gmail.com>"]
+
+[lib]
+name = "captcha"
+
+# This field points at where the crate is located, relative to the `Cargo.toml`.
+path = "src/lib.rs"
+
+# A flag for enabling unit tests for this target. This is used by `cargo test`.
+test = true
+
+[dependencies]
