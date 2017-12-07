@@ -1,4 +1,4 @@
-fn calculate_checksum(input: &str) -> i32 {
+pub fn calculate_checksum(input: &str) -> i32 {
     let split_string: Vec<&str> = input.split('\n').collect();
 
     let rows = convert_rows(split_string);
