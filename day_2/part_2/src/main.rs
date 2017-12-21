@@ -2,7 +2,7 @@ extern crate checksum;
 
 use std::fs::File;
 use std::io::prelude::*;
-use checksum::calculate_checksum;
+use checksum::sum_divisible_values;
 
 pub fn main() {
     let mut file = File::open("./input.txt").expect("file not found");
@@ -14,7 +14,7 @@ pub fn main() {
 
     println!("Contents: {}", contents);
 
-    let solution = calculate_checksum(contents.trim());
+    let solution = sum_divisible_values(contents.trim());
 
     println!("Solution: {}", solution);
 }
